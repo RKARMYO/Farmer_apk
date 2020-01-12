@@ -92,6 +92,9 @@
 						<li> 
 							<a href="flower.html" class="collapsible-header waves-effect ui_navigation" id="developreportbtn"><i class="w-fa fas fa-chart-pie  ui_navigation"></i>ပန်းစိုက်ပျိုးနည်း</a>
 						</li>
+						<li> 
+							<a href="about.html" class="collapsible-header waves-effect ui_navigation" id="developreportbtn"><i class="w-fa fas fa-chart-pie  ui_navigation"></i>About</a>
+						</li>
 					</ul>
 
 					
@@ -802,19 +805,16 @@
 				$(this).parent().hide();
 			});
 
-			if(!navigator.onLine)
+			//===========server data မရှိရင် storage ထဲကပြအောင်================
+			var storedata=JSON.parse(localStorage.getItem("localdata"));
+			if(storedata)
 			{
-				//$("#loading").hide();
-				//===========server data မရှိရင် storage ထဲကပြအောင်================
-				var storedata=JSON.parse(localStorage.getItem("localdata"));
-				if(storedata)
+				for(i=0;i<storedata.length;i++)
 				{
-					for(i=0;i<storedata.length;i++)
-					{
-						$("#toappend").prepend('<span style="color:blue;">'+storedata[i]['title']+'</span><div class="card"><div class="card-body"><p>'+storedata[i]['part1']+'</p><center><img src="https://websitedirectory.000webhostapp.com/farmer_server/images/'+storedata[i]['image']+'" alt="No Internet"></center><span class="toshow">ဆက်လက်ဖတ်ရှု့ရန် </span><span class="hidedata"><p>'+storedata[i]['part2']+'</p><span class="tohide">ပိတ်မည် </span></span></div></div><br>');
-					}
+					$("#toappend").prepend('<span style="color:blue;">'+storedata[i]['title']+'</span><div class="card"><div class="card-body"><p>'+storedata[i]['part1']+'</p><center><img src="https://websitedirectory.000webhostapp.com/farmer_server/images/'+storedata[i]['image']+'" alt="No Internet(image)"></center><span class="toshow">ဆက်လက်ဖတ်ရှု့ရန် </span><span class="hidedata"><p>'+storedata[i]['part2']+'</p><span class="tohide">ပိတ်မည် </span></span></div></div><br>');
 				}
 			}
+			
 			if(navigator.onLine)
 			{
 				$("#loading").show();
@@ -833,7 +833,7 @@
 						var decode=JSON.parse(localStorage.localdata);//console.log("local :"+decode[0]['title']);
 						for(i=0;i<decode.length;i++)
 						{
-							$("#toappend").prepend('<span style="color:blue;">'+decode[i]['title']+'</span><div class="card"><div class="card-body"><p>'+decode[i]['part1']+'</p><center><img src="https://websitedirectory.000webhostapp.com/farmer_server/images/'+decode[i]['image']+'" alt="No Internet"></center><span class="toshow">ဆက်လက်ဖတ်ရှု့ရန် </span><span class="hidedata"><p>'+decode[i]['part2']+'</p><span class="tohide">ပိတ်မည် </span></span></div></div><br>');
+							$("#toappend").prepend('<span style="color:blue;">'+decode[i]['title']+'</span><div class="card"><div class="card-body"><p>'+decode[i]['part1']+'</p><center><img src="https://websitedirectory.000webhostapp.com/farmer_server/images/'+decode[i]['image']+'" alt="No Internet(image)"></center><span class="toshow">ဆက်လက်ဖတ်ရှု့ရန် </span><span class="hidedata"><p>'+decode[i]['part2']+'</p><span class="tohide">ပိတ်မည် </span></span></div></div><br>');
 
 							array_id[i]=decode[i]['dbId'];
 							$("#loading").hide();

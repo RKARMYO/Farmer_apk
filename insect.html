@@ -91,6 +91,9 @@
 						<li> 
 							<a href="flower.html" class="collapsible-header waves-effect ui_navigation" id="developreportbtn"><i class="w-fa fas fa-chart-pie  ui_navigation"></i>ပန်းစိုက်ပျိုးနည်း</a>
 						</li>
+						<li> 
+							<a href="about.html" class="collapsible-header waves-effect ui_navigation" id="developreportbtn"><i class="w-fa fas fa-chart-pie  ui_navigation"></i>About</a>
+						</li>
 					</ul>
 
 					
@@ -556,11 +559,11 @@
 	<script type="text/javascript" src="js/software_store.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
-			$("#loading").show();
-			if(!navigator.onLine)
-			{
-				$("#loading").hide();
-			}
+			// $("#loading").show();
+			// if(!navigator.onLine)
+			// {
+			// 	$("#loading").hide();
+			// }
 			$(document).on("click",".toshow",function(){
 				//alert("ok");
 				$(this).next().show();
@@ -576,49 +579,50 @@
 			{
 				for(i=0;i<storedata.length;i++)
 				{
-					$("#toappend").prepend('<span style="color:blue;">'+storedata[i]['title']+'</span><div class="card"><div class="card-body"><p>'+storedata[i]['part1']+'</p><center><img src="http://websitedirectory.000webhostapp.com/farmer_server/images/'+storedata[i]['image']+'" alt="No Internet"></center><span class="toshow">ဆက်လက်ဖတ်ရှု့ရန် </span><span class="hidedata"><p>'+storedata[i]['part2']+'</p><span class="tohide">ပိတ်မည် </span></span></div></div><br>');
+					$("#toappend").prepend('<span style="color:blue;">'+storedata[i]['title']+'</span><div class="card"><div class="card-body"><p>'+storedata[i]['part1']+'</p><center><img src="https://websitedirectory.000webhostapp.com/farmer_server/images/'+storedata[i]['image']+'" alt="No Internet(image)"></center><span class="toshow">ဆက်လက်ဖတ်ရှု့ရန် </span><span class="hidedata"><p>'+storedata[i]['part2']+'</p><span class="tohide">ပိတ်မည် </span></span></div></div><br>');
 				}
 			}
-
-			var lastid=localStorage.getItem("insectid");
-			$.get("https://websitedirectory.000webhostapp.com/farmer_server/farmer.php",{insect:"insect",lastid:lastid},function(res){ console.log(res);
-				if(res!=404)
-				{
-					var newdata=JSON.parse(res);//console.log(newdata[0]['title']);
-					var org=JSON.parse(localStorage.getItem("insectdata"));
-
-					var array_id= new Array();
-
-					localStorage.setItem("insectdata",JSON.stringify(newdata));
-					var decode=JSON.parse(localStorage.localdata);//console.log("local :"+decode[0]['title']);
-					for(i=0;i<decode.length;i++)
+			if(navigator.onLine)
+			{
+				$("#loading").show();
+				var lastid=localStorage.getItem("insectid");
+				$.get("https://websitedirectory.000webhostapp.com/farmer_server/farmer.php",{insect:"insect",lastid:lastid},function(res){ console.log(res);
+					if(res!=404)
 					{
-						$("#toappend").prepend('<span style="color:blue;">'+decode[i]['title']+'</span><div class="card"><div class="card-body"><p>'+decode[i]['part1']+'</p><center><img src="http://websitedirectory.000webhostapp.com/farmer_server/images/'+decode[i]['image']+'" alt="No Internet"></center><span class="toshow">ဆက်လက်ဖတ်ရှု့ရန် </span><span class="hidedata"><p>'+decode[i]['part2']+'</p><span class="tohide">ပိတ်မည် </span></span></div></div><br>');
+						var newdata=JSON.parse(res);//console.log(newdata[0]['title']);
+						var org=JSON.parse(localStorage.getItem("insectdata"));
 
-						array_id[i]=decode[i]['dbId'];
-					}
+						var array_id= new Array();
 
-					lastid=Math.max.apply(null,array_id);
-				 	localStorage.setItem("insectid",lastid);console.log("last id : "+localStorage.getItem("insectid"));
-
-				 	if(org===null)
-					{
 						localStorage.setItem("insectdata",JSON.stringify(newdata));
+						var decode=JSON.parse(localStorage.insectdata);//console.log("local :"+decode[0]['title']);
+						for(i=0;i<decode.length;i++)
+						{
+							$("#toappend").prepend('<span style="color:blue;">'+decode[i]['title']+'</span><div class="card"><div class="card-body"><p>'+decode[i]['part1']+'</p><center><img src="https://websitedirectory.000webhostapp.com/farmer_server/images/'+decode[i]['image']+'" alt="No Internet(image)"></center><span class="toshow">ဆက်လက်ဖတ်ရှု့ရန် </span><span class="hidedata"><p>'+decode[i]['part2']+'</p><span class="tohide">ပိတ်မည် </span></span></div></div><br>');
+
+							array_id[i]=decode[i]['dbId'];
+						}
+
+						lastid=Math.max.apply(null,array_id);
+						localStorage.setItem("insectid",lastid);console.log("last id : "+localStorage.getItem("insectid"));
+
+						if(org===null)
+						{
+							localStorage.setItem("insectdata",JSON.stringify(newdata));
+						}
+						else
+						{
+							var all=org.concat(newdata);
+							localStorage.setItem("insectdata",JSON.stringify(all));
+						}
+						$("#loading").hide();
 					}
 					else
 					{
-						var all=org.concat(newdata);
-						localStorage.setItem("insectdata",JSON.stringify(all));
+						$("#loading").hide();
 					}
-					$("#loading").hide();
-				}
-				else
-				{
-					$("#loading").hide();
-				}
-			});
-
-			
+				});
+			}	
 		});
 	</script>
 </body>
