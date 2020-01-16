@@ -29,7 +29,8 @@
 				$location="images/".time().$image;//echo $location;
 				if(move_uploaded_file($tmp,$location))
 				{
-					$sql=$conn->prepare("INSERT INTO $table (title,part1,part2,image) VALUES (?,?,?,?)");
+					//$sql=$conn->prepare("INSERT INTO $table (title,part1,part2,image) VALUES (?,?,?,?)");
+					$sql=$conn->prepare("INSERT INTO tech_news (title,part1,part2,image) VALUES (?,?,?,?)");
 					$sql->bind_param("ssss",$ti,$p1,$p2,$img);
 					$ti=security($_POST['title']);
 					$p1=security($_POST['textareapart1']);
