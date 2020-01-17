@@ -47,7 +47,7 @@
 			color: blue;
 			font-weight: bold;
 		}
-		.version
+		.version,.notitext
 		{
 			color: red;
 			font-weight: bold;
@@ -63,6 +63,7 @@
 		<div id="slide-out" class="side-nav sn-bg-4 fixed">
 			<ul class="custom-scrollbar">
 				<!-- Logo -->
+				<center><p><i class="fab fa-android fa-2x pink-text ml-3" aria-hidden="true"></i></p></center>
 				<li class="logo-sn waves-effect py-3">
 					<div class="text-center">
 						
@@ -77,6 +78,9 @@
 						
 						<li> 
 							<a href="home.html" class="collapsible-header waves-effect ui_navigation" id="developreportbtn"><i class="w-fa fas fa-chart-pie  ui_navigation"></i>နည်းပညာသတင်းများ</a>
+						</li>
+						<li> 
+							<a href="#" class="collapsible-header waves-effect ui_navigation delete" id="developreportbtn"><i class="w-fa fas fa-chart-pie  ui_navigation"></i>သတင်းဟောင်းများဖျက်မည်</a>
 						</li>
 						<li> 
 							<a href="about.html" class="collapsible-header waves-effect ui_navigation active" id="developreportbtn"><i class="w-fa fas fa-chart-pie  ui_navigation"></i>About</a>
@@ -104,12 +108,12 @@
 			</div>
 			<div class="d-flex change-mode">
 				<!-- Navbar links -->
-				<ul class="nav navbar-nav nav-flex-icons ml-auto" style="display: none;">
+				<ul class="nav navbar-nav nav-flex-icons ml-auto" style="display:;">
 					<li class="nav-item dropdown">
-						<a  href="index.html" class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="fas fa-comments-dollar"></i>  <span class="clearfix d-none d-sm-inline-block"></span>
+						<a  href="#" class="nav-link dropdown-toggle waves-effect" href="#" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="far fa-bell"><span class="notitext"></span></i>  <span class="clearfix d-none d-sm-inline-block" ></span>
 						</a>
 
-						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown"> <a   href="index.html"  class="dropdown-item ui_navigation" href="#login_section" id="logout_btn">မူလစာမျက်နှာ</a>
+						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown" style="display: none;" > <a   href="#"  class="dropdown-item ui_navigation" href="#login_section" id="logout_btn">မူလစာမျက်နှာ</a>
 						</div>
 					</li>
 				</ul>
@@ -130,7 +134,7 @@
 				<div style="width: 90%;height: 400px;margin-left: 5%;margin-top: 50px;background-color: rgba(0,0,0,0.2);">
                     <p>
                         <span class="title">Tech_News Apk</span><br>
-                        ဖုန်းနဲ့ပတ်သက်တဲ့သတင်း၊ ကွန်ပျူတာနဲ့ပတ်သတ်တဲ့သတင်း အပြင် အခြားနည်းပညာသတင်းများတွေကို အချိန်နဲ့တပြေးညီ တင်ပေးသွားမှာြဖစ်ပါတယ်။
+                        ဖုန်းနဲ့ပတ်သက်တဲ့သတင်း၊ ကွန်ပျူတာနဲ့ပတ်သတ်တဲ့သတင်း အပြင် အခြားနည်းပညာသတင်းများတွေကို အချိန်နဲ့တပြေးညီ တင်ပေးသွားမှာဖြစ်ပါတယ်။
                     </p>
                     <p>
                         အကြံပေးချင်တာရှိရင်လည်း ကျွန်တော်တို့ရဲ့ facebook page မှာ လာရောက်ပြောကြားနိုင်ပါတယ်။
@@ -222,6 +226,18 @@
 		    $(function () {
 		      $('[data-toggle="tooltip"]').tooltip()
 		    })
+
+		    $(document).ready(function(){
+		    	//============== user မှ delete လုပ်ရင် ======
+				$(document).on("click",".delete",function(){ //alert("delete ok");
+					var check=confirm("ဖျက်မှာသေချာလား ?");//alert(check);
+					if(check==true)
+					{
+						localStorage.removeItem('localdata');
+						window.location.assign("home.html");
+					}
+				});
+		    });
 	</script>
 	<!-- Our JavaScript -->
 	<script type="text/javascript" src="js/software_store.js"></script>
